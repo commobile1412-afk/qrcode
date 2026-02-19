@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Device Owner QR</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        body { display:flex; flex-direction:column; align-items:center; font-family:sans-serif; padding:40px; }
+        #qrcode { margin: 24px 0; }
+    </style>
+</head>
+<body>
+    <h2>Device Owner QR Code</h2>
+    <div id="qrcode"></div>
+    <p>สแกนด้วย Android ที่เพิ่ง Factory Reset แล้วแตะ 6 ครั้ง</p>
+
+    <script>
+        const payload = {
+            "android.app.extra.PROVISIONING_DEVICE_ADMIN_COMPONENT_NAME":
+                "com.example.deviceowner/.DeviceAdminReceiverImpl",
+            "android.app.extra.PROVISIONING_DEVICE_ADMIN_PACKAGE_DOWNLOAD_LOCATION":
+                "https://github.com/commobile1412-afk/device-owner-apk/releases/download/v1.0.0/app-release.apk",
+            "android.app.extra.PROVISIONING_DEVICE_ADMIN_SIGNATURE_CHECKSUM":
+                "h9RMmnVliNVK_hUwOUIwG4G7wJIgFaRFUNla88Awqn0",
+            "android.app.extra.PROVISIONING_SKIP_ENCRYPTION": false
+        };
+
+        new QRCode(document.getElementById("qrcode"), {
+            text: JSON.stringify(payload),
+            width: 400,
+            height: 400,
+            correctLevel: QRCode.CorrectLevel.M
+        });
+    </script>
+</body>
+</html>
